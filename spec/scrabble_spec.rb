@@ -127,6 +127,15 @@ describe Scrabble do
         tilebag.draw_tiles 3
         expect(tilebag.tiles_remaining).to eq 95
       end
+
+      context "when all the tiles for a letter have been drawn" do
+        it "removes the letter from the tilebag" do
+          tilebag.tiles["A"] = 1
+          tilebag.draw_letter "A"
+          expect(tilebag.tiles.keys.include? "A").to eq false
+          expect(tilebag.tiles.keys.count).to eq 25
+        end
+      end
     end
 
     describe "#tiles_remaining" do

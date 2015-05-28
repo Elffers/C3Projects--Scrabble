@@ -37,9 +37,20 @@ module Scrabble
       letters = tiles.keys
       draw = letters.sample(n)
       draw.each do |letter|
-        tiles[letter] -= 1
+        draw_letter letter
       end
       draw
+    end
+
+    def draw_letter letter
+      if tiles[letter]
+        tiles[letter] -= 1
+        if tiles[letter] == 0
+          tiles.delete letter
+        end
+      else
+        puts "That letter is not available"
+      end
     end
 
     def tiles_remaining
