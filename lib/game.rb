@@ -47,18 +47,21 @@ module Scrabble
         score = score word
         Word.new(word, score, word.length)
       end
+
       scores = word_list.map { |word| word.score }
       max = scores.max
 
       max_words = word_list.select do |word|
         word.score == max
       end
+
       max_words_lengths = max_words.map { |word| word.length }
       min = max_words_lengths.min
 
       max_words = word_list.select do |word|
         word.length == min
       end
+
       max_words[0].string
     end
   end

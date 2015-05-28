@@ -1,3 +1,3 @@
 module Scrabble
-  require_relative './Game.rb'
+  require_relative './game'
 end
