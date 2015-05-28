@@ -75,5 +75,14 @@ describe Scrabble do
         expect(person.won?).to eq false
       end
     end
+
+    describe "#highest_scoring_word" do
+      it "returns the word with highest score" do
+        person.play "foo"
+        person.play "bananas"
+        person.play "hand"
+        expect(person.highest_scoring_word).to eq "bananas"
+      end
+    end
   end
 end

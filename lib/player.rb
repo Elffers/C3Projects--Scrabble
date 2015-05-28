@@ -20,5 +20,9 @@ module Scrabble
     def won?
       total_score > 100
     end
+
+    def highest_scoring_word
+      Scrabble::Game.highest_score_from plays
+    end
   end
 end
