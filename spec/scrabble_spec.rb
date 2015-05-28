@@ -92,4 +92,13 @@ describe Scrabble do
       end
     end
   end
+
+  describe Scrabble::TileBag do
+    describe "#new" do
+      it "initializes collection of tiles" do
+        bag = Scrabble::TileBag.new
+        expect(bag.tiles["A"]).to eq 9
+      end
+    end
+  end
 end
