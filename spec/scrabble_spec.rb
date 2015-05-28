@@ -58,5 +58,12 @@ describe Scrabble do
       end
     end
 
+    describe "#total_score" do
+      it "returns sum of all words played" do
+        person.play "foo"
+        person.play "bar"
+        expect(person.total_score).to eq 11
+      end
+    end
   end
 end

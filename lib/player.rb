@@ -10,5 +10,11 @@ module Scrabble
     def play word
       @plays << word
     end
+
+    def total_score
+      plays.map do |word|
+        Scrabble::Game.score word
+      end.reduce(:+)
+    end
   end
 end
