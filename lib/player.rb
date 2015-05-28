@@ -16,5 +16,9 @@ module Scrabble
         Scrabble::Game.score word
       end.reduce(:+)
     end
+
+    def won?
+      total_score > 100
+    end
   end
 end

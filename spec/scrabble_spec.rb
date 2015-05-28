@@ -33,8 +33,6 @@ describe Scrabble do
   describe Scrabble::Player do
     let(:person) { Scrabble::Player.new("Bookis") }
 
-#total_score: Sums up and returns the score of the players words
-#won?: If the player has over 100 points, returns true, otherwise returns 'false'
 #highest_scoring_word: Returns the highest scoring word the user has played.
 #highest_word_score: Returns the highest_scoring_word score.
     describe "#name" do
@@ -63,6 +61,18 @@ describe Scrabble do
         person.play "foo"
         person.play "bar"
         expect(person.total_score).to eq 11
+      end
+    end
+
+    describe "#won?" do
+      it "returns true if total score is greater than 100 points" do
+        2.times { person.play "bananas" }
+        expect(person.won?).to eq true
+      end
+
+      it "returns false if total score is less than 100 points" do
+        2.times { person.play "foo" }
+        expect(person.won?).to eq false
       end
     end
   end
