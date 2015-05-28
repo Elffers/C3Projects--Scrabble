@@ -28,12 +28,38 @@ module Scrabble
     "z"=>10 }
 
   class Game
+
+    Word = Struct.new(:string, :score, :length)
+
     def self.score word
       points = word.chars.map do |letter|
         SCORES[letter.downcase]
       end
-      points.reduce(:+)
+      score = points.reduce(:+)
+      if word.length == 7
+        score += 50
+      end
+      score
     end
 
+    def self.highest_score_from words
+      word_list = words.map do |word|
+        score = score word
+        Word.new(word, score, word.length)
+      end
+      scores = word_list.map { |word| word.score }
+      max = scores.max
+
+      max_words = word_list.select do |word|
+        word.score == max
+      end
+      max_words_lengths = max_words.map { |word| word.length }
+      min = max_words_lengths.min
+
+      max_words = word_list.select do |word|
+        word.length == min
+      end
+      max_words[0].string
+    end
   end
 end
