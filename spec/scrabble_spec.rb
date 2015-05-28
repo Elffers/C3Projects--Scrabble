@@ -31,64 +31,78 @@ describe Scrabble do
   end
 
   describe Scrabble::Player do
-    let(:person) { Scrabble::Player.new("Bookis") }
+    let(:player) { Scrabble::Player.new("Bookis") }
 
     describe "#name" do
       it "returns the player's name" do
-        expect(person.name).to eq "Bookis"
+        expect(player.name).to eq "Bookis"
       end
     end
 
     describe "#play" do
       it "adds a word to the player's plays" do
-        person.play "foo"
-        expect(person.plays).to eq ["foo"]
+        player.play "foo"
+        expect(player.plays).to eq ["foo"]
       end
     end
 
     describe "#plays" do
       it "returns an array of words" do
-        expect(person.plays).to be_an_instance_of Array
-        person.play "foo"
-        expect(person.plays.first).to be_an_instance_of String
+        expect(player.plays).to be_an_instance_of Array
+        player.play "foo"
+        expect(player.plays.first).to be_an_instance_of String
       end
     end
 
     describe "#total_score" do
       it "returns sum of all words played" do
-        person.play "foo"
-        person.play "bar"
-        expect(person.total_score).to eq 11
+        player.play "foo"
+        player.play "bar"
+        expect(player.total_score).to eq 11
       end
     end
 
     describe "#won?" do
       it "returns true if total score is greater than 100 points" do
-        2.times { person.play "bananas" }
-        expect(person.won?).to eq true
+        2.times { player.play "bananas" }
+        expect(player.won?).to eq true
       end
 
       it "returns false if total score is less than 100 points" do
-        2.times { person.play "foo" }
-        expect(person.won?).to eq false
+        2.times { player.play "foo" }
+        expect(player.won?).to eq false
       end
     end
 
     describe "#highest_scoring_word" do
       it "returns the word with highest score" do
-        person.play "foo"
-        person.play "bananas"
-        person.play "hand"
-        expect(person.highest_scoring_word).to eq "bananas"
+        player.play "foo"
+        player.play "bananas"
+        player.play "hand"
+        expect(player.highest_scoring_word).to eq "bananas"
       end
     end
 
     describe "#highest_word_score" do
       it "returns the score of highest scoring word" do
-        person.play "foo"
-        person.play "bananas"
-        person.play "hand"
-        expect(person.highest_word_score).to eq 59
+        player.play "foo"
+        player.play "bananas"
+        player.play "hand"
+        expect(player.highest_word_score).to eq 59
+      end
+    end
+
+    describe "#draw_tiles" do
+      it "returns a maximum of 7 tiles" do
+        tilebag = Scrabble::TileBag.new
+        player.draw_tiles(tilebag)
+        expect(player.tiles.count).to eq 7
+      end
+
+      it "returns the players current tiles" do
+        tilebag = Scrabble::TileBag.new
+        player.draw_tiles(tilebag)
+        expect(player.tiles.all? {|tile| tile.is_a? String } ).to eq true
       end
     end
   end
@@ -118,6 +132,10 @@ describe Scrabble do
     describe "#tiles_remaining" do
       it "returns the remaining number of tiles" do
         expect(tilebag.tiles_remaining).to eq 98
+        tilebag.draw_tiles 4
+        expect(tilebag.tiles_remaining).to eq 94
+        tilebag.draw_tiles 5
+        expect(tilebag.tiles_remaining).to eq 89
       end
     end
   end

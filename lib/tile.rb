@@ -1,12 +1,3 @@
-# Create a TileBag class with a minimum of 5 specs. It should have the following class and instance methods:
-
-#draw_tiles(n) returns n number of random tiles, removes the tiles from the default set.
-#tiles_remaining returns the number of tiles remaining in the bag
-# Create specs for (minimum 2) and add to the Player class the following instance methods:
-
-#tiles a collection of letters that the player can play (max 7)
-#draw_tiles(tile_bag) fills tiles array until it has 7 letters from the given tile bag
-
 module Scrabble
   class TileBag
     attr_reader :tiles
