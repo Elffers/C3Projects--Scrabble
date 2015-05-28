@@ -29,4 +29,20 @@ describe Scrabble do
       end
     end
   end
+
+  describe Scrabble::Player do
+#plays: returns an Array of the words played by the player
+#play(word): Adds the input word to the plays Array
+
+#total_score: Sums up and returns the score of the players words
+#won?: If the player has over 100 points, returns true, otherwise returns 'false'
+#highest_scoring_word: Returns the highest scoring word the user has played.
+#highest_word_score: Returns the highest_scoring_word score.
+    describe "#name" do
+      it "returns the player's name" do
+        person = Scrabble::Player.new("Bookis")
+        expect(person.name).to eq "Bookis"
+      end
+    end
+  end
 end
