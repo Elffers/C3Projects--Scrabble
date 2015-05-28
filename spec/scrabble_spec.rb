@@ -94,10 +94,30 @@ describe Scrabble do
   end
 
   describe Scrabble::TileBag do
+    let(:tilebag) { Scrabble::TileBag.new }
+
     describe "#new" do
       it "initializes collection of tiles" do
-        bag = Scrabble::TileBag.new
-        expect(bag.tiles["A"]).to eq 9
+        expect(tilebag.tiles["A"]).to eq 9
+      end
+    end
+
+    describe "#draw_tiles" do
+      it "returns n number of random tiles" do
+        tiles = tilebag.draw_tiles 3
+        expect(tiles).to be_an_instance_of Array
+        expect(tiles.count).to eq 3
+      end
+
+      it "reduces the total number of tiles" do
+        tilebag.draw_tiles 3
+        expect(tilebag.tiles_remaining).to eq 95
+      end
+    end
+
+    describe "#tiles_remaining" do
+      it "returns the remaining number of tiles" do
+        expect(tilebag.tiles_remaining).to eq 98
       end
     end
   end

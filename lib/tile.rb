@@ -1,6 +1,5 @@
 # Create a TileBag class with a minimum of 5 specs. It should have the following class and instance methods:
 
-# self.new creates an instance with a collection of default tiles
 #draw_tiles(n) returns n number of random tiles, removes the tiles from the default set.
 #tiles_remaining returns the number of tiles remaining in the bag
 # Create specs for (minimum 2) and add to the Player class the following instance methods:
@@ -10,7 +9,6 @@
 
 module Scrabble
   class TileBag
-
     attr_reader :tiles
 
     def initialize
@@ -42,6 +40,19 @@ module Scrabble
         "Y" => 2,
         "Z" => 1
       }
+    end
+
+    def draw_tiles n
+      letters = tiles.keys
+      draw = letters.sample(n)
+      draw.each do |letter|
+        tiles[letter] -= 1
+      end
+      draw
+    end
+
+    def tiles_remaining
+      tiles.values.reduce(:+)
     end
   end
 end
