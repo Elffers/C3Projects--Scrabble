@@ -33,8 +33,6 @@ describe Scrabble do
   describe Scrabble::Player do
     let(:person) { Scrabble::Player.new("Bookis") }
 
-#highest_scoring_word: Returns the highest scoring word the user has played.
-#highest_word_score: Returns the highest_scoring_word score.
     describe "#name" do
       it "returns the player's name" do
         expect(person.name).to eq "Bookis"
@@ -82,6 +80,15 @@ describe Scrabble do
         person.play "bananas"
         person.play "hand"
         expect(person.highest_scoring_word).to eq "bananas"
+      end
+    end
+
+    describe "#highest_word_score" do
+      it "returns the score of highest scoring word" do
+        person.play "foo"
+        person.play "bananas"
+        person.play "hand"
+        expect(person.highest_word_score).to eq 59
       end
     end
   end

@@ -36,9 +36,11 @@ module Scrabble
         SCORES[letter.downcase]
       end
       score = points.reduce(:+)
+
       if word.length == 7
         score += 50
       end
+
       score
     end
 

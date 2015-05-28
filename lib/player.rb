@@ -24,5 +24,10 @@ module Scrabble
     def highest_scoring_word
       Scrabble::Game.highest_score_from plays
     end
+
+    def highest_word_score
+      word = highest_scoring_word
+      Scrabble::Game.score word
+    end
   end
 end
